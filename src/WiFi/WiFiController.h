@@ -17,8 +17,6 @@
         private:
             WiFiConnector wifiConnector;
             Signalizator signalizator;
-            void sendConection();
-            void sendConected();
     };
 
 #endif

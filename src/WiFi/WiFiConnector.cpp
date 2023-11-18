@@ -18,11 +18,7 @@ bool WiFiConnector::isConnected() {
 }
 
 void WiFiConnector::connect() {
-    Serial.println("Connecting to WiFi...");
-
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
     }
-
-    Serial.println("Connected to WiFi");
 }

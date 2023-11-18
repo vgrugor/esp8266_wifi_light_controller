@@ -11,24 +11,9 @@ bool WiFiController::isConnected() {
 }
 
 void WiFiController::connect() {
-    this->sendConection();
+    this->signalizator.wifiConnection();
 
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(1000);
-    }
+    this->wifiConnector.connect();
 
-    this->sendConected();
-}
-
-void WiFiController::sendConection() {
-    Serial.println("Connecting to WiFi...");
-
-    this->signalizator.redOn();
-}
-
-void WiFiController::sendConected() {
-    this->signalizator.redOff();
-    this->signalizator.greenBlink(5);
-
-    Serial.println("Connected to WiFi");
+    this->signalizator.wifiConnected();
 }

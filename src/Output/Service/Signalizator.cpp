@@ -1,44 +1,20 @@
 #include "Output/Service/Signalizator.h"
 
 Signalizator::Signalizator(const int greenLedPin, const int redLedPin)
-    : greenLed(OutputDigitalPinController(greenLedPin)),
-    redLed(OutputDigitalPinController(redLedPin))
+    : greenLed(OutputDigitalPin(greenLedPin)),
+    redLed(OutputDigitalPin(redLedPin))
 {
 }
 
-void Signalizator::greenBlink(int count, int delayMs) {
-    for (int i = 0; i < count; i++) {
-        this->greenLed.toggle();
-        delay(delayMs);
-    }
-    this->greenOff();
-}
-
-void Signalizator::redBlink(int count, int delayMs) {
-    for (int i = 0; i < count; i++) {
-        this->redLed.toggle();
-        delay(delayMs);
-    }
-    this->redOff();
-}
-
-void Signalizator::greenOn() {
-    this->greenLed.turnOn();
-}
-
-void Signalizator::redOn() {
+void Signalizator::wifiConnection() {
     this->redLed.turnOn();
+
+    Serial.println("Connecting to WiFi...");
 }
 
-void Signalizator::greenOff() {
-    this->greenLed.turnOff();
-}
-
-void Signalizator::redOff() {
+void Signalizator::wifiConnected() {
     this->redLed.turnOff();
-}
+    this->greenLed.blink(5);
 
-void Signalizator::allOff() {
-    this->greenLed.turnOff();
-    this->redLed.turnOff();
+    Serial.println("Connected to WiFi");
 }

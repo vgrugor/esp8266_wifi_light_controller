@@ -3,7 +3,7 @@
 #define LIGHTCONTROLLER_H
 
 #include <Arduino.h>
-#include "Output/Pin/OutputAnalogPinController.h"
+#include "Output/Pin/OutputAnalogPin.h"
 
 class LightController {
 public:
@@ -20,9 +20,9 @@ public:
 private:
     const int DISABLED_LEVEL = 255;
     const int MAX_LEVEL = 255;
-    OutputAnalogPinController leftLedMatrix;
-    OutputAnalogPinController centerLedMatrix;
-    OutputAnalogPinController rightLedMatrix;
+    OutputAnalogPin leftLedMatrix;
+    OutputAnalogPin centerLedMatrix;
+    OutputAnalogPin rightLedMatrix;
 };
 
 #endif

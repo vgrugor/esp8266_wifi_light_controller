@@ -1,9 +1,9 @@
 #include "Output/Service/LightController.h"
 
 LightController::LightController(const int leftLedMatrix, const int centerLedMatrix, const int rightLedMatrix)
-    : leftLedMatrix(OutputAnalogPinController(leftLedMatrix)),
-    centerLedMatrix(OutputAnalogPinController(centerLedMatrix)),
-    rightLedMatrix(OutputAnalogPinController(rightLedMatrix))
+    : leftLedMatrix(OutputAnalogPin(leftLedMatrix)),
+    centerLedMatrix(OutputAnalogPin(centerLedMatrix)),
+    rightLedMatrix(OutputAnalogPin(rightLedMatrix))
 {
 }
 
@@ -33,9 +33,9 @@ void LightController::turnOffAllLedMatrix() {
 
 void LightController::slowTurnOffAllLedMatrix() {
     //TODO: need add delay
-    this->leftLedMatrix.setLevel(LightController::DISABLED_LEVEL);
-    this->centerLedMatrix.setLevel(LightController::DISABLED_LEVEL);
-    this->rightLedMatrix.setLevel(LightController::DISABLED_LEVEL);
+    this->leftLedMatrix.slowSetLevel(LightController::DISABLED_LEVEL);
+    this->centerLedMatrix.slowSetLevel(LightController::DISABLED_LEVEL);
+    this->rightLedMatrix.slowSetLevel(LightController::DISABLED_LEVEL);
 }
 
 void LightController::turnOnAllLedMatrix() {
@@ -46,7 +46,7 @@ void LightController::turnOnAllLedMatrix() {
 
 void LightController::slowTurnOnAllLedMatrix() {
     //TODO: need add delay
-    this->leftLedMatrix.setLevel(LightController::MAX_LEVEL);
-    this->centerLedMatrix.setLevel(LightController::MAX_LEVEL);
-    this->rightLedMatrix.setLevel(LightController::MAX_LEVEL);
+    this->leftLedMatrix.slowSetLevel(LightController::MAX_LEVEL);
+    this->centerLedMatrix.slowSetLevel(LightController::MAX_LEVEL);
+    this->rightLedMatrix.slowSetLevel(LightController::MAX_LEVEL);
 }

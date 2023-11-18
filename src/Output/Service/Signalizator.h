@@ -1,24 +1,19 @@
 // Signalizator.h
 #ifndef SIGNALIZATOR_H
-#define SIGNALIZATOR_H
+    #define SIGNALIZATOR_H
 
-#include <Arduino.h>
-#include "Output/Pin/OutputDigitalPinController.h"
+    #include <Arduino.h>
+    #include "Output/Pin/OutputDigitalPin.h"
 
-class Signalizator {
-public:
-    Signalizator(const int greenLedPin, const int redLedPin);
-    void greenBlink(int count, int delayMs = 1000);
-    void redBlink(int count, int delayMs = 1000);
-    void greenOn();
-    void redOn();
-    void greenOff();
-    void redOff();
-    void allOff();
+    class Signalizator {
+        public:
+            Signalizator(const int greenLedPin, const int redLedPin);
+            void wifiConnection();
+            void wifiConnected();
 
-private:
-    OutputDigitalPinController greenLed;
-    OutputDigitalPinController redLed;
-};
+        private:
+            OutputDigitalPin greenLed;
+            OutputDigitalPin redLed;
+    };
 
 #endif
