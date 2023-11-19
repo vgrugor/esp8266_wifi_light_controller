@@ -4,9 +4,9 @@
 
     #include <Arduino.h>
     #include "App/config/wifi.h"
-    #include "Output/SignalPinsConfig.h"
+    #include "App/config/logger.h"
     #include "Facades/WiFi/WiFiConnectionFacade.h"
-    #include "Output/Service/Signalizator.h"
+    #include "App/Logger/Logger.h"
 
     class WiFiConnectionWrapper {
         public:

@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "App/config/wifi.h"
 #include "App/WiFi/WiFiConnectionWrapper.h"
-#include "Output/SignalPinsConfig.h"
+#include "App/config/logger.h"
 
 WiFiConnectionWrapper WiFiConnection {wifiConfig, signalPins};
 

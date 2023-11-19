@@ -1,4 +1,4 @@
-#include "Output/Service/Signalizator.h"
+#include "App/Logger/Logger.h"
 
 Signalizator::Signalizator(const int greenLedPin, const int redLedPin)
     : greenLed(OutputDigitalPin(greenLedPin)),

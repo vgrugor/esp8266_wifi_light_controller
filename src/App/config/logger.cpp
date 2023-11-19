@@ -1,4 +1,4 @@
-#include "Output/SignalPinsConfig.h"
+#include "App/config/logger.h"
 
 const SignalPins signalPins = {
     GREEN_LED_PIN,
