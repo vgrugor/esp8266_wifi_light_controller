@@ -3,7 +3,7 @@
 
 WiFiConnectionWrapper::WiFiConnectionWrapper(const WiFiConfig& wifiConfig, const SignalPins& signalPins) 
     : wifiConnector(WiFiConnectionFacade {wifiConfig.ssid, wifiConfig.password, wifiConfig.ip, wifiConfig.gateway, wifiConfig.subnet}),
-    signalizator(Signalizator {signalPins.greenLedPin, signalPins.redLedPin})
+    logger(Logger {signalPins.greenLedPin, signalPins.redLedPin})
 {
 }
 
@@ -12,9 +12,9 @@ bool WiFiConnectionWrapper::isConnected() {
 }
 
 void WiFiConnectionWrapper::connect() {
-    this->signalizator.wifiConnection();
+    this->logger.wifiConnection();
 
     this->wifiConnector.connect();
 
-    this->signalizator.wifiConnected();
+    this->logger.wifiConnected();
 }

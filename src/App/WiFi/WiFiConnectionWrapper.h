@@ -16,7 +16,7 @@
 
         private:
             WiFiConnectionFacade wifiConnector;
-            Signalizator signalizator;
+            Logger logger;
     };
 
 #endif

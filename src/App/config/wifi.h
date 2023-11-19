@@ -1,17 +1,17 @@
 // WiFiConfig.h
 #ifndef WIFICONFIG_H
-#define WIFICONFIG_H
+    #define WIFICONFIG_H
 
-#include "env.h"
+    #include "env.h"
 
-struct WiFiConfig {
-    const char* ssid;
-    const char* password;
-    const char* ip;
-    const char* gateway;
-    const char* subnet;
-};
+    struct WiFiConfig {
+        const char* ssid;
+        const char* password;
+        const char* ip;
+        const char* gateway;
+        const char* subnet;
+    };
 
-extern const WiFiConfig wifiConfig;
+    extern const WiFiConfig wifiConfig;
 
 #endif 

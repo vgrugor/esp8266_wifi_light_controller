@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "App/config/wifi.h"
+#include "App/config/temperatureSensor.h"
 #include "App/WiFi/WiFiConnectionWrapper.h"
 #include "App/config/logger.h"
 
