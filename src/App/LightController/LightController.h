@@ -3,7 +3,7 @@
     #define LIGHTCONTROLLER_H
 
     #include <Arduino.h>
-    #include "Output/Pin/OutputAnalogPin.h"
+    #include "Hardware/Pin/OutputAnalogPin.h"
 
     class LightController {
         public:

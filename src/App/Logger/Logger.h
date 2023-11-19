@@ -3,7 +3,7 @@
     #define SIGNALIZATOR_H
 
     #include <Arduino.h>
-    #include "Output/Pin/OutputDigitalPin.h"
+    #include "Hardware/Pin/OutputDigitalPin.h"
 
     class Signalizator {
         public:

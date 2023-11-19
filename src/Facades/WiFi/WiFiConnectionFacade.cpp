@@ -2,7 +2,7 @@
 #include "Facades/WiFi/WiFiConnectionFacade.h"
 
 WiFiConnectionFacade::WiFiConnectionFacade(const char* ssid, const char* password, const char* ip, const char* gateway, const char* subnet) 
-    : parserIPAddress(IPParser())
+    : parserIPAddress(StringToIPParser())
 {
     WiFi.mode(WIFI_STA);
     WiFi.config(

@@ -3,7 +3,7 @@
     #define WIFICONNECTIONFACADE_H
 
     #include <ESP8266WiFi.h>
-    #include "Helpers/IPParser.h"
+    #include "Helpers/String/StringToIPParser.h"
 
     class WiFiConnectionFacade {
         public:
@@ -15,7 +15,7 @@
             IPAddress ip;
             IPAddress gateway;
             IPAddress subnet;
-            IPParser parserIPAddress;
+            StringToIPParser parserIPAddress;
     };
 
 #endif
