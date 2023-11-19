@@ -1,7 +1,7 @@
-#include "WiFiConnector.h"
 #include <Arduino.h>
+#include "Facades/WiFi/WiFiConnectionFacade.h"
 
-WiFiConnector::WiFiConnector(const char* ssid, const char* password, const char* ip, const char* gateway, const char* subnet) 
+WiFiConnectionFacade::WiFiConnectionFacade(const char* ssid, const char* password, const char* ip, const char* gateway, const char* subnet) 
     : parserIPAddress(IPParser())
 {
     WiFi.mode(WIFI_STA);
@@ -13,11 +13,11 @@ WiFiConnector::WiFiConnector(const char* ssid, const char* password, const char*
     WiFi.begin(ssid, password);
 }
 
-bool WiFiConnector::isConnected() {
+bool WiFiConnectionFacade::isConnected() {
     return WiFi.status() == WL_CONNECTED;
 }
 
-void WiFiConnector::connect() {
+void WiFiConnectionFacade::connect() {
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
     }

@@ -1,5 +1,5 @@
 // WiFiConfig.cpp
-#include "WiFi/WiFiConfig.h"
+#include "App/config/wifi.h"
 
 const WiFiConfig wifiConfig = {
     WIFI_SSID,

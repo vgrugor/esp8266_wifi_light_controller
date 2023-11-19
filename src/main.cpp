@@ -1,16 +1,16 @@
 #include <Arduino.h>
-#include "WiFi/WiFiConfig.h"
-#include "WiFi/WiFiController.h"
+#include "App/config/wifi.h"
+#include "App/WiFi/WiFiConnectionWrapper.h"
 #include "Output/SignalPinsConfig.h"
 
-WiFiController WiFiManager {wifiConfig, signalPins};
+WiFiConnectionWrapper WiFiConnection {wifiConfig, signalPins};
 
 void setup() {
-  WiFiManager.connect();
+    WiFiConnection.connect();
 }
 
 void loop() {
-  if (!WiFiManager.isConnected()) {
-    WiFiManager.connect();
-  }
+    if (!WiFiConnection.isConnected()) {
+        WiFiConnection.connect();
+    }
 }
