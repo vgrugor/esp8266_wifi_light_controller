@@ -1,4 +1,4 @@
-#include "Output/Service/LightController.h"
+#include "App/LightController/LightController.h"
 
 LightController::LightController(const int leftLedMatrix, const int centerLedMatrix, const int rightLedMatrix)
     : leftLedMatrix(OutputAnalogPin(leftLedMatrix)),
