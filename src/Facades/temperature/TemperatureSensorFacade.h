@@ -7,7 +7,7 @@
 
     class TemperatureSensorFacade {
         public:
-            TemperatureSensorFacade(const uint8_t temperaturePin);
+            TemperatureSensorFacade(const unsigned char temperaturePin);
             void init();
             float getTemperatureC();
 

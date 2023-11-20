@@ -5,7 +5,7 @@
     #include "env.h"
 
     struct TemperaturePin {
-        const uint8_t pin;
+        const unsigned char pin;
     };
 
     extern const TemperaturePin temperaturePin;

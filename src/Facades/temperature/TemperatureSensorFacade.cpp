@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "Facades/temperature/TemperatureSensorFacade.h"
 
-TemperatureSensorFacade::TemperatureSensorFacade(const uint8_t temperaturePin)
+TemperatureSensorFacade::TemperatureSensorFacade(const unsigned char temperaturePin)
 {
     OneWire oneWire {temperaturePin};
     this->sensor = DallasTemperature {&oneWire};

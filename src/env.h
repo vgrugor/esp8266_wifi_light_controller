@@ -13,6 +13,6 @@
     extern const int GREEN_LED_PIN;
     extern const int RED_LED_PIN;
 
-    extern const uint8_t TEMPERATURE_SENSOR_PIN;
+    extern const unsigned char TEMPERATURE_SENSOR_PIN;
 
 #endif // ENV_H
