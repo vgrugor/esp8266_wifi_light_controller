@@ -21,10 +21,15 @@ void OutputDigitalPin::toggle() {
 }
 
 void OutputDigitalPin::blink(int count, int delayMs) {
-    for (int i = 0; i < count; i++) {
-        this->toggle();
+    if (digitalRead(this->pin) == HIGH) {
+        this->turnOff();
         delay(delayMs);
     }
 
-    this->turnOff();
+    for (int i = 0; i < count; i++) {
+        this->toggle();
+        delay(delayMs);
+        this->toggle();
+        delay(delayMs);
+    }
 }
