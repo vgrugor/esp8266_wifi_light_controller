@@ -6,17 +6,19 @@ Logger::Logger(const int greenLedPin, const int redLedPin)
 {
 }
 
-void Logger::wifiConnection() {
+void Logger::wifiErrorSetStaticIp() {
     this->redLed.turnOn();
 
-    Serial.println("Connecting to WiFi...");
+    Serial.println("Error set static Ip");
+}
+
+void Logger::wifiConnection() {
+    this->redLed.turnOn();
 }
 
 void Logger::wifiConnected() {
     this->redLed.turnOff();
     this->greenLed.blink(5);
-
-    Serial.println("Connected to WiFi");
 }
 
 void Logger::gettingTemperature() {

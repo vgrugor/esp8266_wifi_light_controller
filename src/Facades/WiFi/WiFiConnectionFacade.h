@@ -2,20 +2,19 @@
 #ifndef WIFICONNECTIONFACADE_H
     #define WIFICONNECTIONFACADE_H
 
+    #include <Arduino.h>
     #include <ESP8266WiFi.h>
-    #include "Helpers/String/StringToIPParser.h"
+    #include "App/config/wifi.h"
 
     class WiFiConnectionFacade {
         public:
-            WiFiConnectionFacade(const char* ssid, const char* password, const char* ip, const char* gateway, const char* subnet);
+            WiFiConnectionFacade();
+            void connect(const WiFiConfig& wifiConfig);
             bool isConnected();
-            void connect();
+            void reconnect();
 
         private:
-            IPAddress ip;
-            IPAddress gateway;
-            IPAddress subnet;
-            StringToIPParser parserIPAddress;
+            ESP8266WiFiClass wifi;
     };
 
 #endif
