@@ -1,6 +1,11 @@
 #include "Facades/WiFi/WiFiConnectionFacade.h"
 
-WiFiConnectionFacade::WiFiConnectionFacade()
+WiFiConnectionFacade::WiFiConnectionFacade(const char* ssid, const char* password, const char* ip, const char* gateway, const char* subnet)
+    : ssid(ssid),
+    password(password),
+    ip(ip),
+    gateway(gateway),
+    subnet(subnet)
 {
 }
 
@@ -44,9 +49,9 @@ void WiFiConnectionFacade::setStaticIpAddress() {
     IPAddress gateway;
     IPAddress subnet;
 
-    ip.fromString(WiFiConnectionFacade::WIFI_IP);
-    gateway.fromString(WiFiConnectionFacade::WIFI_GATEWAY);
-    subnet.fromString(WiFiConnectionFacade::WIFI_SUBNET);
+    ip.fromString(this->ip);
+    gateway.fromString(this->gateway);
+    subnet.fromString(this->subnet);
 
     if(!this->wifi.config(ip, gateway, subnet)) {
         Serial.println("Error set static IP");
@@ -58,14 +63,14 @@ void WiFiConnectionFacade::setStaticIpAddress() {
 void WiFiConnectionFacade::begin() {
     Serial.println("Wifi begin");
 
-    this->wifi.begin(WiFiConnectionFacade::WIFI_SSID, WiFiConnectionFacade::WIFI_PASSWORD);
+    this->wifi.begin(this->ssid, this->password);
 
     Serial.println("Wifi begin end");
 
 }
 
 void WiFiConnectionFacade::connect() {
-    Serial.println("Connecting to WiFi");
+    Serial.print("Connecting to WiFi");
 
     while (this->wifi.status() != WL_CONNECTED) {
         Serial.print(".");
