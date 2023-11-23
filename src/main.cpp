@@ -14,7 +14,7 @@ void setup() {
     pinMode(RED_LED_PIN, OUTPUT);
 
     Ledlogger.wifiConnection();
-    WiFiConnection.initAndConnect(wifiConfig);
+    WiFiConnection.initAndConnect();
     Ledlogger.wifiConnected();
 }
 

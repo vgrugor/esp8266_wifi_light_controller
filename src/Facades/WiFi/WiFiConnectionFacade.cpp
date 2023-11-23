@@ -4,7 +4,7 @@ WiFiConnectionFacade::WiFiConnectionFacade()
 {
 }
 
-void WiFiConnectionFacade::initAndConnect(const WiFiConfig& wifiConfig)
+void WiFiConnectionFacade::initAndConnect()
 {
     Serial.println("WiFi setting start");
 
@@ -40,7 +40,15 @@ void WiFiConnectionFacade::setMode() {
 void WiFiConnectionFacade::setStaticIpAddress() {
     Serial.println("Set WiFi static ip");
 
-    if(!this->wifi.config(wifiConfig.ip, wifiConfig.gateway, wifiConfig.subnet)) {
+    IPAddress ip;
+    IPAddress gateway;
+    IPAddress subnet;
+
+    ip.fromString(WiFiConnectionFacade::WIFI_IP);
+    gateway.fromString(WiFiConnectionFacade::WIFI_GATEWAY);
+    subnet.fromString(WiFiConnectionFacade::WIFI_SUBNET);
+
+    if(!this->wifi.config(ip, gateway, subnet)) {
         Serial.println("Error set static IP");
     }
 
@@ -50,7 +58,7 @@ void WiFiConnectionFacade::setStaticIpAddress() {
 void WiFiConnectionFacade::begin() {
     Serial.println("Wifi begin");
 
-    this->wifi.begin(wifiConfig.ssid, wifiConfig.password);
+    this->wifi.begin(WiFiConnectionFacade::WIFI_SSID, WiFiConnectionFacade::WIFI_PASSWORD);
 
     Serial.println("Wifi begin end");
 
