@@ -1,4 +1,4 @@
-#include "Facades/WiFi/WiFiConnectionFacade.h"
+#include "App/Facades/WiFi/WiFiConnectionFacade.h"
 
 WiFiConnectionFacade::WiFiConnectionFacade(const char* ssid, const char* password, const char* ip, const char* gateway, const char* subnet)
     : ssid(ssid),

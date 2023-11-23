@@ -2,7 +2,7 @@
 #ifndef TEMPERATURESENSORWRAPPER_H
     #define TEMPERATURESENSORWRAPPER_H
 
-    #include "Facades/temperature/TemperatureSensorFacade.h"
+    #include "App/Facades/temperature/TemperatureSensorFacade.h"
     #include "App/Logger/Logger.h"
     #include "App/config/temperatureSensor.h"
     #include "App/config/logger.h"
