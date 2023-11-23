@@ -10,7 +10,7 @@
           void turnOn();
           void turnOff();
           void toggle();
-          void blink(int count, int delayMs = 1000);
+          void blink(int count, int delayMs = 500);
 
         private:
           int pin;
