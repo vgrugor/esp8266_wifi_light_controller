@@ -1,6 +1,6 @@
 #include "App/Facades/WebSocket/WebSocketFacade.h"
 
-WebSocketFacade::WebSocketFacade(/* args */)
+WebSocketFacade::WebSocketFacade()
     : webSocket(AsyncWebSocket {"/ws"})
 {
     using namespace std::placeholders;

@@ -1,4 +1,4 @@
-// WebSocketFacade
+// WebSocketFacade.h
 #ifndef WEBSOCKETFACADE_H
     #define WEBSOCKETFACADE_H
 
@@ -13,7 +13,6 @@
 
         private:
             AsyncWebSocket webSocket;
-            void notifyClients();
             void handleEvent(
                 AsyncWebSocket *server,
                 AsyncWebSocketClient *client,
@@ -23,6 +22,7 @@
                 size_t len
             );
             void handleMessage(void *arg, uint8_t *data, size_t len);
+            void notifyClients();
     };
 
 #endif

@@ -7,18 +7,28 @@ WebServerFacade::WebServerFacade()
 }
 
 void WebServerFacade::init() {
+    Serial.println("Start init web server:");
+
     this->addWsHandler();
 
     this->initRoutes();
 
     this->begin();
+
+    Serial.println("Finish init web server");
 }
 
 void WebServerFacade::addWsHandler() {
+    Serial.println(" - start add handler");
+
     this->server.addHandler(this->webSocketFacade.getWebSocketObject());
+
+    Serial.println(" - finish add handler");
 }
 
 void WebServerFacade::initRoutes() {
+    Serial.println(" - start init routes");
+
     this->server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(200, "text/html", 
             R"rawliteral(
@@ -150,10 +160,16 @@ void WebServerFacade::initRoutes() {
     this->server.on("/test", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(200, "text/plain", "test routs");
     });
+
+    Serial.println(" - finish init routes");
 }
 
 void WebServerFacade::begin() {
+    Serial.println(" - start web server begin");
+
     this->server.begin();
+
+    Serial.println(" - finish web server begin");
 }
 
 void WebServerFacade::cleanupClients() {

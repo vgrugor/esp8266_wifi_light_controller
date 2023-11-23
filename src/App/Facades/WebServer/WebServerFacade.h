@@ -16,8 +16,8 @@
             AsyncWebServer server;
             WebSocketFacade webSocketFacade;
             void addWsHandler();
-            void begin();
             void initRoutes();
+            void begin();
     };
 
 #endif
