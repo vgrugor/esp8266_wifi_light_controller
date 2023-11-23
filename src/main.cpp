@@ -6,7 +6,6 @@
 #include "App/Facades/WiFi/WiFiConnectionFacade.h"
 #include "App/Facades/WebServer/WebServerFacade.h"
 
-Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 WiFiConnectionFacade WiFiConnection {
     WIFI_SSID,
     WIFI_PASSWORD,
@@ -14,8 +13,8 @@ WiFiConnectionFacade WiFiConnection {
     WIFI_GATEWAY,
     WIFI_SUBNET
 };
-
 WebServerFacade webServer;
+Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 
 void setup() {
     Serial.begin(115200);
