@@ -11,6 +11,7 @@
         public:
             WebServerFacade();
             void init();
+            void cleanupClients();
 
         private:
             AsyncWebServer server;
@@ -28,7 +29,6 @@
                 size_t len
             );
             void handleWebSocketMessage(void *arg, uint8_t *data, size_t len);
-            void cleanupClients();
     };
 
 #endif

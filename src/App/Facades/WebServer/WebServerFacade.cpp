@@ -51,9 +51,6 @@ void WebServerFacade::handleWebSocketMessage(void *arg, uint8_t *data, size_t le
         data[len] = 0;
         if (strcmp((char*)data, "toggle") == 0) {
             Serial.println("ws handled");
-            digitalWrite(2, HIGH);
-            delay(1000);
-            digitalWrite(2, LOW);
             this->notifyClients();
         }
     }
@@ -204,5 +201,9 @@ void WebServerFacade::initRoutes() {
                 </html>
                 )rawliteral"
         );
+    });
+
+    this->server.on("/test", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(200, "text/plain", "test routs");
     });
 }
