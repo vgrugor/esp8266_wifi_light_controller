@@ -39,7 +39,11 @@ void WebSocketFacade::handleEvent(
     }
 }
 
-void WebSocketFacade::handleMessage(void *arg, uint8_t *data, size_t len) {
+void WebSocketFacade::handleMessage(
+    void *arg,
+    uint8_t *data,
+    size_t len
+) {
     Serial.println("Run ws handler");
     AwsFrameInfo *info = (AwsFrameInfo*)arg;
     if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
@@ -48,39 +52,53 @@ void WebSocketFacade::handleMessage(void *arg, uint8_t *data, size_t len) {
         String message = (char*)data;
 
         LightController lightController;
+        WsData& wsData = WsData::getInstance();
 
         if (message.indexOf("1s") >= 0) {
             String allSliderValue = message.substring(2);
-            lightController.allLedMatrixSetLevel(allSliderValue.toInt());
-            //notifyClients(getSliderValues());
+            wsData.setAllLedMatrixLevel(allSliderValue.toInt());
+            lightController.allLedMatrixSetLevel(wsData.getAllLedMatrixLevel());
+            this->notifyClients();
         }
 
         if (message.indexOf("2s") >= 0) {
-            String leftSliderValue = message.substring(2);
-            lightController.leftLedMatrixSetLevel(leftSliderValue.toInt());
-            //notifyClients(getSliderValues());
+            String timerMinute = message.substring(2);
+            wsData.setTimerMinute(timerMinute.toInt());
+            //lightController.rightLedMatrixSetLevel(timerMinute.toInt());
+            this->notifyClients();
         }
 
         if (message.indexOf("3s") >= 0) {
-            String centerSliderValue = message.substring(2);
-            lightController.centerLedMatrixSetLevel(centerSliderValue.toInt());
-            //notifyClients(getSliderValues());
+            String leftSliderValue = message.substring(2);
+            wsData.setLeftLedMatrixLevel(leftSliderValue.toInt());
+            lightController.leftLedMatrixSetLevel(wsData.getLeftLedMatrixLevel());
+            this->notifyClients();
         }
 
         if (message.indexOf("4s") >= 0) {
             String centerSliderValue = message.substring(2);
-            lightController.rightLedMatrixSetLevel(centerSliderValue.toInt());
-            //notifyClients(getSliderValues());
+            wsData.setCenterLedMatrixLevel(centerSliderValue.toInt());
+            lightController.centerLedMatrixSetLevel(wsData.getCenterLedMatrixLevel());
+            this->notifyClients();
+        }
+
+        if (message.indexOf("5s") >= 0) {
+            String rightSliderValue = message.substring(2);
+            wsData.setRightLedMatrixLevel(rightSliderValue.toInt());
+            lightController.rightLedMatrixSetLevel(wsData.getRightLedMatrixLevel());
+            this->notifyClients();
         }
 
         if (strcmp((char*)data, "getValues") == 0) {
-            //notifyClients(getSliderValues());
+            this->notifyClients();
         }
     }
 }
 
-void WebSocketFacade::notifyClients(String sliderValues) {
-    this->webSocket.textAll(sliderValues);
+void WebSocketFacade::notifyClients() {
+    WsData& wsData = WsData::getInstance();
+
+    this->webSocket.textAll(wsData.toJSON());
 }
 
 void WebSocketFacade::cleanupClients() {
