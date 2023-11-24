@@ -3,6 +3,7 @@
     #define WEBSOCKETFACADE_H
 
     #include <ESPAsyncWebServer.h>
+    #include "App/LightController/LightController.h"
 
     class WebSocketFacade
     {
@@ -22,7 +23,7 @@
                 size_t len
             );
             void handleMessage(void *arg, uint8_t *data, size_t len);
-            void notifyClients();
+            void notifyClients(String sliderValues);
     };
 
 #endif
