@@ -44,15 +44,43 @@ void WebSocketFacade::handleMessage(void *arg, uint8_t *data, size_t len) {
     AwsFrameInfo *info = (AwsFrameInfo*)arg;
     if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
         data[len] = 0;
-        if (strcmp((char*)data, "toggle") == 0) {
-            Serial.println("ws handled");
-            this->notifyClients();
+
+        String message = (char*)data;
+
+        LightController lightController;
+
+        if (message.indexOf("1s") >= 0) {
+            String allSliderValue = message.substring(2);
+            lightController.allLedMatrixSetLevel(allSliderValue.toInt());
+            //notifyClients(getSliderValues());
+        }
+
+        if (message.indexOf("2s") >= 0) {
+            String leftSliderValue = message.substring(2);
+            lightController.leftLedMatrixSetLevel(leftSliderValue.toInt());
+            //notifyClients(getSliderValues());
+        }
+
+        if (message.indexOf("3s") >= 0) {
+            String centerSliderValue = message.substring(2);
+            lightController.centerLedMatrixSetLevel(centerSliderValue.toInt());
+            //notifyClients(getSliderValues());
+        }
+
+        if (message.indexOf("4s") >= 0) {
+            String centerSliderValue = message.substring(2);
+            lightController.rightLedMatrixSetLevel(centerSliderValue.toInt());
+            //notifyClients(getSliderValues());
+        }
+
+        if (strcmp((char*)data, "getValues") == 0) {
+            //notifyClients(getSliderValues());
         }
     }
 }
 
-void WebSocketFacade::notifyClients() {
-    this->webSocket.textAll("String(ledState)");
+void WebSocketFacade::notifyClients(String sliderValues) {
+    this->webSocket.textAll(sliderValues);
 }
 
 void WebSocketFacade::cleanupClients() {

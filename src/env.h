@@ -13,6 +13,10 @@
     extern const int GREEN_LED_PIN;
     extern const int RED_LED_PIN;
 
+    extern const int LEFT_LED_MATRIX;
+    extern const int CENTER_LED_MATRIX;
+    extern const int RIGHT_LED_MATRIX;
+
     extern const unsigned char TEMPERATURE_SENSOR_PIN;
 
 #endif // ENV_H

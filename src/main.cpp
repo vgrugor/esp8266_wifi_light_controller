@@ -24,6 +24,9 @@ void setup() {
 
     pinMode(GREEN_LED_PIN, OUTPUT);
     pinMode(RED_LED_PIN, OUTPUT);
+    pinMode(LEFT_LED_MATRIX, OUTPUT);
+    pinMode(CENTER_LED_MATRIX, OUTPUT);
+    pinMode(RIGHT_LED_MATRIX, OUTPUT);
 
     littleFS.init();
 
