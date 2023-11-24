@@ -157,9 +157,11 @@ void WebServerFacade::initRoutes() {
         );
     });
 
-    this->server.on("/test", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(200, "text/plain", "test routs");
+    this->server.on("outdoor/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
+        request->send(200, "text/plain", "-3");
     });
+
+    //this->server.onNotFound(notFound);
 
     Serial.println(" - finish init routes");
 }
