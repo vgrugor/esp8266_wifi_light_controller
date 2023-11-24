@@ -1,11 +1,14 @@
 #include <Arduino.h>
 #include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
+#include "LittleFS.h"
 #include "env.h"
 #include "App/Logger/Logger.h"
 #include "App/Facades/WiFi/WiFiConnectionFacade.h"
 #include "App/Facades/WebServer/WebServerFacade.h"
+#include "App/Facades/LittleFS/LittleFSFacade.h"
 
+LittleFSFacade littleFS;
 WiFiConnectionFacade WiFiConnection {
     WIFI_SSID,
     WIFI_PASSWORD,
@@ -21,6 +24,8 @@ void setup() {
 
     pinMode(GREEN_LED_PIN, OUTPUT);
     pinMode(RED_LED_PIN, OUTPUT);
+
+    littleFS.init();
 
     Ledlogger.wifiConnection();
     WiFiConnection.initAndConnect();
