@@ -1,7 +1,8 @@
 #include "App/Facades/WebSocket/WebSocketFacade.h"
 
 WebSocketFacade::WebSocketFacade()
-    : webSocket(AsyncWebSocket {"/ws"})
+    : webSocket(AsyncWebSocket {"/ws"}),
+    wsMessageResolver(WsMessageResolver {})
 {
     using namespace std::placeholders;
 
@@ -39,48 +40,29 @@ void WebSocketFacade::handleEvent(
     }
 }
 
-void WebSocketFacade::handleMessage(void *arg, uint8_t *data, size_t len) {
+void WebSocketFacade::handleMessage(
+    void *arg,
+    uint8_t *data,
+    size_t len
+) {
     Serial.println("Run ws handler");
     AwsFrameInfo *info = (AwsFrameInfo*)arg;
     if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT) {
         data[len] = 0;
 
         String message = (char*)data;
+        bool result = this->wsMessageResolver.resolve(message);
 
-        LightController lightController;
-
-        if (message.indexOf("1s") >= 0) {
-            String allSliderValue = message.substring(2);
-            lightController.allLedMatrixSetLevel(allSliderValue.toInt());
-            //notifyClients(getSliderValues());
-        }
-
-        if (message.indexOf("2s") >= 0) {
-            String leftSliderValue = message.substring(2);
-            lightController.leftLedMatrixSetLevel(leftSliderValue.toInt());
-            //notifyClients(getSliderValues());
-        }
-
-        if (message.indexOf("3s") >= 0) {
-            String centerSliderValue = message.substring(2);
-            lightController.centerLedMatrixSetLevel(centerSliderValue.toInt());
-            //notifyClients(getSliderValues());
-        }
-
-        if (message.indexOf("4s") >= 0) {
-            String centerSliderValue = message.substring(2);
-            lightController.rightLedMatrixSetLevel(centerSliderValue.toInt());
-            //notifyClients(getSliderValues());
-        }
-
-        if (strcmp((char*)data, "getValues") == 0) {
-            //notifyClients(getSliderValues());
+        if (result) {
+             this->notifyClients();
         }
     }
 }
 
-void WebSocketFacade::notifyClients(String sliderValues) {
-    this->webSocket.textAll(sliderValues);
+void WebSocketFacade::notifyClients() {
+    WsData& wsData = WsData::getInstance();
+
+    this->webSocket.textAll(wsData.toJSON());
 }
 
 void WebSocketFacade::cleanupClients() {

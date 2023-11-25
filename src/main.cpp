@@ -18,6 +18,7 @@ WiFiConnectionFacade WiFiConnection {
 };
 WebServerFacade webServer;
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
+WsData& wsData = WsData::getInstance();
 
 void setup() {
     Serial.begin(115200);
@@ -35,6 +36,7 @@ void setup() {
     Ledlogger.wifiConnected();
 
     webServer.init();
+    wsData.initializeData();
 }
 
 void loop() {
