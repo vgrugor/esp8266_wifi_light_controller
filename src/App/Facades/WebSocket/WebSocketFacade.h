@@ -3,8 +3,9 @@
     #define WEBSOCKETFACADE_H
 
     #include <ESPAsyncWebServer.h>
-    #include "App/LightController/LightController.h"
+    //#include "App/LightController/LightController.h"
     #include "App/data/ws/wsData.h"
+    #include "App/WsMessageResolver/WsMessageResolver.h"
 
     class WebSocketFacade
     {
@@ -15,6 +16,7 @@
 
         private:
             AsyncWebSocket webSocket;
+            WsMessageResolver wsMessageResolver;
             void handleEvent(
                 AsyncWebSocket *server,
                 AsyncWebSocketClient *client,
