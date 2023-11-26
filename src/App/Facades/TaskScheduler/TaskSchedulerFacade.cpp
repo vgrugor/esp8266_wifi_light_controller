@@ -17,3 +17,7 @@ void TaskSchedulerFacade::addTaskInMinutes(unsigned char minute, void (*funcPtr)
 void TaskSchedulerFacade::addTaskInHours(unsigned char hour, void (*funcPtr)()) {
     this->alarm.timerOnce(hour, 0, 0, funcPtr);
 }
+
+void TaskSchedulerFacade::handleTask() {
+    this->alarm.delay(0);
+}

@@ -1,10 +1,16 @@
 #include "App/Task/DisableAllLedMatrix/DisableAllLedMatrixTask.h"
-#include <iostream>
 
 DisableAllLedMatrixTask::DisableAllLedMatrixTask()
 {
 }
 
 void DisableAllLedMatrixTask::run() {
-    //std::cout << "DisableAllLedMatrixTask\n";
+    Serial.println("DisableAllLedMatrixTask start");
+
+    WsData& wsData = WsData::getInstance();
+    LightController lightController {};
+    wsData.setTimerMinute(0);
+    lightController.turnOffAllLedMatrix();
+
+    Serial.println("DisableAllLedMatrixTask done");
 }

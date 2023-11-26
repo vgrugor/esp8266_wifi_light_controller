@@ -49,9 +49,16 @@ void WsMessageResolver::changeAllLedMatrixLevel(String message) {
 }
 
 void WsMessageResolver::changeTimerMinute(String message) {
+    Serial.println("changeTimerMinute handled");
+
     String timerMinute = message.substring(2);
     wsData.setTimerMinute(timerMinute.toInt());
-    this->taskScheduler.addTaskInMinutes(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
+
+    Serial.println(wsData.getTimerMinute());
+
+    this->taskScheduler.addTaskInSeconds(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
+
+    Serial.println("changeTimerMinute finish");
 }
 
 void WsMessageResolver::changeLeftLedMatrixLevel(String message) {

@@ -1,12 +1,17 @@
 #include <Arduino.h>
 #include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
+#include <Time.h>
+#include <TimeAlarms.h>
 #include "LittleFS.h"
 #include "env.h"
 #include "App/Logger/Logger.h"
 #include "App/Facades/WiFi/WiFiConnectionFacade.h"
 #include "App/Facades/WebServer/WebServerFacade.h"
 #include "App/Facades/LittleFS/LittleFSFacade.h"
+
+#include "App/Task/DisableAllLedMatrix/DisableAllLedMatrixTask.h"
+#include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
 
 LittleFSFacade littleFS;
 WiFiConnectionFacade WiFiConnection {
@@ -19,6 +24,7 @@ WiFiConnectionFacade WiFiConnection {
 WebServerFacade webServer;
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 WsData& wsData = WsData::getInstance();
+TaskSchedulerFacade taskScheduler {};
 
 void setup() {
     Serial.begin(115200);
@@ -37,6 +43,8 @@ void setup() {
 
     webServer.init();
     wsData.initializeData();
+
+    taskScheduler.addTaskInSeconds(30, DisableAllLedMatrixTask::run);
 }
 
 void loop() {
@@ -47,4 +55,6 @@ void loop() {
     }
 
     webServer.cleanupClients();
+
+    taskScheduler.handleTask();
 }
