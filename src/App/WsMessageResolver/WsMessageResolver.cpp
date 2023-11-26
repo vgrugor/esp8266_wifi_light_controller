@@ -2,7 +2,8 @@
 
 WsMessageResolver::WsMessageResolver()
     : lightController(LightController {}),
-    wsData(WsData::getInstance())
+    wsData(WsData::getInstance()),
+    taskScheduler(TaskSchedulerFacade {})
 {
 }
 
@@ -50,8 +51,7 @@ void WsMessageResolver::changeAllLedMatrixLevel(String message) {
 void WsMessageResolver::changeTimerMinute(String message) {
     String timerMinute = message.substring(2);
     wsData.setTimerMinute(timerMinute.toInt());
-    //add task to cron
-    //lightController.rightLedMatrixSetLevel(timerMinute.toInt());
+    this->taskScheduler.addTaskInMinutes(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
 }
 
 void WsMessageResolver::changeLeftLedMatrixLevel(String message) {
