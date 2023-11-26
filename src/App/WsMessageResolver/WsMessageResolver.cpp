@@ -54,7 +54,7 @@ void WsMessageResolver::changeTimerMinute(String message) {
     String timerMinute = message.substring(2);
     wsData.setTimerMinute(timerMinute.toInt());
 
-    this->taskScheduler.addTaskInSeconds(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
+    this->taskScheduler.addTaskInMinutes(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
 
     Serial.println("changeTimerMinute finish");
 }
