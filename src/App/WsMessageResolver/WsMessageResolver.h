@@ -17,7 +17,7 @@
         private:
             LightController lightController;
             WsData& wsData;
-            TaskSchedulerFacade taskScheduler;
+            TaskSchedulerFacade& taskScheduler;
             void changeAllLedMatrixLevel(String message);
             void changeTimerMinute(String message);
             void changeLeftLedMatrixLevel(String message);

@@ -1,8 +1,11 @@
 #include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
 
-TaskSchedulerFacade::TaskSchedulerFacade()
-    : alarm(TimeAlarmsClass {})
-{
+TaskSchedulerFacade& TaskSchedulerFacade::getInstance() {
+    static TaskSchedulerFacade instance;
+    return instance;
+}
+
+void TaskSchedulerFacade::initTime() {
     setTime(0, 0, 0, 25, 11, 23);
 }
 

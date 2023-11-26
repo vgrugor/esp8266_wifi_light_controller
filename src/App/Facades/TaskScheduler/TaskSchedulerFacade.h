@@ -10,7 +10,8 @@
     class TaskSchedulerFacade
     {
         public:
-            TaskSchedulerFacade();
+            static TaskSchedulerFacade& getInstance();
+            void initTime();
             void addTaskInSeconds(unsigned char second, void (*funcPtr)());
             void addTaskInMinutes(unsigned char minute, void (*funcPtr)());
             void addTaskInHours(unsigned char hour, void (*funcPtr)());
@@ -18,6 +19,10 @@
 
         private:
             TimeAlarmsClass alarm;
+            TaskSchedulerFacade() = default;
+            ~TaskSchedulerFacade() = default;
+            TaskSchedulerFacade(const TaskSchedulerFacade&) = delete;
+            TaskSchedulerFacade& operator=(const TaskSchedulerFacade&) = delete;
     };
 
 #endif

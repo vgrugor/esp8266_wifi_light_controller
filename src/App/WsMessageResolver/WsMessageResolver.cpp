@@ -3,7 +3,7 @@
 WsMessageResolver::WsMessageResolver()
     : lightController(LightController {}),
     wsData(WsData::getInstance()),
-    taskScheduler(TaskSchedulerFacade {})
+    taskScheduler(TaskSchedulerFacade::getInstance())
 {
 }
 
@@ -53,8 +53,6 @@ void WsMessageResolver::changeTimerMinute(String message) {
 
     String timerMinute = message.substring(2);
     wsData.setTimerMinute(timerMinute.toInt());
-
-    Serial.println(wsData.getTimerMinute());
 
     this->taskScheduler.addTaskInSeconds(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
 

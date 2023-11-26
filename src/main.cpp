@@ -24,10 +24,12 @@ WiFiConnectionFacade WiFiConnection {
 WebServerFacade webServer;
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 WsData& wsData = WsData::getInstance();
-TaskSchedulerFacade taskScheduler {};
+TaskSchedulerFacade& taskScheduler = TaskSchedulerFacade::getInstance();
 
 void setup() {
     Serial.begin(115200);
+
+    taskScheduler.initTime();
 
     pinMode(GREEN_LED_PIN, OUTPUT);
     pinMode(RED_LED_PIN, OUTPUT);
@@ -44,7 +46,7 @@ void setup() {
     webServer.init();
     wsData.initializeData();
 
-    taskScheduler.addTaskInSeconds(30, DisableAllLedMatrixTask::run);
+    //taskScheduler.addTaskInSeconds(30, DisableAllLedMatrixTask::run); add get temperature task
 }
 
 void loop() {
