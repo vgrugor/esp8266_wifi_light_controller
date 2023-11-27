@@ -1,8 +1,7 @@
 #include "App/Facades/WebServer/WebServerFacade.h"
 
 WebServerFacade::WebServerFacade()
-    : server(AsyncWebServer {80})//,
-    //webSocketFacade(WebSocketFacade::getInstance())
+    : server(AsyncWebServer {80})
 {
 }
 

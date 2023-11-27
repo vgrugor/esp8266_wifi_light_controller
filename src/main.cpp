@@ -47,8 +47,6 @@ void loop() {
         Ledlogger.wifiConnected();
     }
 
-    //webServer.cleanupClients();
     webSocket.cleanupClients();
-
     taskScheduler.handleTask();
 }
