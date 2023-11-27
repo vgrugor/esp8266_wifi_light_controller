@@ -11,9 +11,6 @@
 #include "App/Facades/WebServer/WebServerFacade.h"
 #include "App/Logger/Logger.h"
 
-//#include "App/Task/DisableAllLedMatrix/DisableAllLedMatrixTask.h"
-//#include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
-
 LittleFSFacade littleFS;
 WiFiConnectionFacade WiFiConnection {
     WIFI_SSID,
@@ -48,7 +45,7 @@ void setup() {
     taskScheduler.initTime();
     wsData.initializeData();
 
-    //taskScheduler.addTaskInSeconds(30, DisableAllLedMatrixTask::run); add get temperature task
+    //taskScheduler.addRepeatTaskInSeconds(5, DisableAllLedMatrixTask::run);
 }
 
 void loop() {

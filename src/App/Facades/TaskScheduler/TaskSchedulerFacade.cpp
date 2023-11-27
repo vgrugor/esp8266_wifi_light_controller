@@ -24,3 +24,15 @@ void TaskSchedulerFacade::addTaskInHours(unsigned char hour, void (*funcPtr)()) 
 void TaskSchedulerFacade::handleTask() {
     this->alarm.delay(0);
 }
+
+void TaskSchedulerFacade::addRepeatTaskInSeconds(unsigned char second, void (*funcPtr)()) {
+    this->alarm.timerRepeat(0, 0, second, funcPtr);
+}
+
+void TaskSchedulerFacade::addRepeatTaskInMinutes(unsigned char minute, void (*funcPtr)()) {
+    this->alarm.timerRepeat(0, minute, 0, funcPtr);
+}
+
+void TaskSchedulerFacade::addRepeatTaskInHours(unsigned char hour, void (*funcPtr)()) {
+    this->alarm.timerRepeat(hour, 0, 0, funcPtr);
+}

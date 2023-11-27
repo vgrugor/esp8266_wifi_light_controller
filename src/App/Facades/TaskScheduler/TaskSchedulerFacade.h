@@ -15,6 +15,9 @@
             void addTaskInSeconds(unsigned char second, void (*funcPtr)());
             void addTaskInMinutes(unsigned char minute, void (*funcPtr)());
             void addTaskInHours(unsigned char hour, void (*funcPtr)());
+            void addRepeatTaskInSeconds(unsigned char second, void (*funcPtr)());
+            void addRepeatTaskInMinutes(unsigned char minute, void (*funcPtr)());
+            void addRepeatTaskInHours(unsigned char hour, void (*funcPtr)());
             void handleTask();
 
         private:
