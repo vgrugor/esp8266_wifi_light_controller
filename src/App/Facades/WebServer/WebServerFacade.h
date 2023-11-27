@@ -3,7 +3,6 @@
     #define WEBSERVERFACADE_H
 
     #include <ESPAsyncWebServer.h>
-    #include <functional>
     #include "App/Facades/WebSocket/WebSocketFacade.h"
     #include "LittleFS.h"
 
@@ -11,11 +10,9 @@
         public:
             WebServerFacade();
             void init();
-            void cleanupClients();
 
         private:
             AsyncWebServer server;
-            WebSocketFacade webSocketFacade;
             void addWsHandler();
             void initRoutes();
             void begin();

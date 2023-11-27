@@ -2,9 +2,11 @@
 #ifndef WSMESSAGERESOLVER_H
     #define WSMESSAGERESOLVER_H
 
-    #include "Arduino.h"
+    #include <Arduino.h>
     #include "App/LightController/LightController.h"
     #include "App/data/ws/wsData.h"
+    #include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
+    #include "App/Task/DisableAllLedMatrix/DisableAllLedMatrixTask.h"
 
     class WsMessageResolver
     {
@@ -15,6 +17,7 @@
         private:
             LightController lightController;
             WsData& wsData;
+            TaskSchedulerFacade& taskScheduler;
             void changeAllLedMatrixLevel(String message);
             void changeTimerMinute(String message);
             void changeLeftLedMatrixLevel(String message);

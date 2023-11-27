@@ -1,8 +1,12 @@
 #include "App/Facades/WebSocket/WebSocketFacade.h"
 
+WebSocketFacade& WebSocketFacade::getInstance() {
+    static WebSocketFacade instance;
+    return instance;
+}
+
 WebSocketFacade::WebSocketFacade()
-    : webSocket(AsyncWebSocket {"/ws"}),
-    wsMessageResolver(WsMessageResolver {})
+    : webSocket(AsyncWebSocket {"/ws"})
 {
     using namespace std::placeholders;
 
@@ -31,7 +35,7 @@ void WebSocketFacade::handleEvent(
             Serial.printf("WebSocket client #%u disconnected\n", client->id());
             break;
         case WS_EVT_DATA:
-            Serial.println("WebSocket client event before run handler");
+            Serial.println("WebSocket client event WS_EVT_DATA");
             this->handleMessage(arg, data, len);
             break;
         case WS_EVT_PONG:
@@ -51,7 +55,9 @@ void WebSocketFacade::handleMessage(
         data[len] = 0;
 
         String message = (char*)data;
-        bool result = this->wsMessageResolver.resolve(message);
+
+        WsMessageResolver wsMessageResolver {};
+        bool result = wsMessageResolver.resolve(message);
 
         if (result) {
              this->notifyClients();
@@ -60,6 +66,7 @@ void WebSocketFacade::handleMessage(
 }
 
 void WebSocketFacade::notifyClients() {
+    Serial.println("Notify clients");
     WsData& wsData = WsData::getInstance();
 
     this->webSocket.textAll(wsData.toJSON());

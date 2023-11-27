@@ -18,7 +18,7 @@ void Logger::wifiConnection() {
 
 void Logger::wifiConnected() {
     this->redLed.turnOff();
-    this->greenLed.blink(5);
+    this->greenLed.blink(2);
 }
 
 void Logger::gettingTemperature() {

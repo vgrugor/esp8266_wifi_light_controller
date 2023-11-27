@@ -35,15 +35,15 @@ void WiFiConnectionFacade::reconnect() {
 }
 
 void WiFiConnectionFacade::setMode() {
-    Serial.println("Set WiFi mode");
+    Serial.println(" - set WiFi mode");
 
     this->wifi.mode(WIFI_STA);
 
-    Serial.println("Mode saved");
+    Serial.println(" - mode saved");
 }
 
 void WiFiConnectionFacade::setStaticIpAddress() {
-    Serial.println("Set WiFi static ip");
+    Serial.println(" - set WiFi static ip");
 
     IPAddress ip;
     IPAddress gateway;
@@ -54,37 +54,37 @@ void WiFiConnectionFacade::setStaticIpAddress() {
     subnet.fromString(this->subnet);
 
     if(!this->wifi.config(ip, gateway, subnet)) {
-        Serial.println("Error set static IP");
+        Serial.println(" - ERROR set static IP");
     }
 
-    Serial.println("Static IP saved");
+    Serial.println(" - static IP saved");
 }
 
 void WiFiConnectionFacade::begin() {
-    Serial.println("Wifi begin");
+    Serial.println(" - wifi begin");
 
     this->wifi.begin(this->ssid, this->password);
 
-    Serial.println("Wifi begin end");
+    Serial.println(" - wifi begin end");
 
 }
 
 void WiFiConnectionFacade::connect() {
-    Serial.print("Connecting to WiFi");
+    Serial.print(" - connecting to WiFi");
 
     while (this->wifi.status() != WL_CONNECTED) {
         Serial.print(".");
         delay(1000);
     }
 
-    Serial.println("Connected to WiFi");
+    Serial.println(" - connected to WiFi");
 }
 
 void WiFiConnectionFacade::setAutoreconnect() {
-    Serial.println("Set autoreconnect params for WiFi");
+    Serial.println(" - set autoreconnect params for WiFi");
 
     this->wifi.setAutoReconnect(true);
     this->wifi.persistent(true);
 
-    Serial.println("Autoreconnect params for WiFi saved");
+    Serial.println(" - autoreconnect params for WiFi saved");
 }

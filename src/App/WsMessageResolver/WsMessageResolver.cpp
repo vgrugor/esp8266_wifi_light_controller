@@ -2,39 +2,48 @@
 
 WsMessageResolver::WsMessageResolver()
     : lightController(LightController {}),
-    wsData(WsData::getInstance())
+    wsData(WsData::getInstance()),
+    taskScheduler(TaskSchedulerFacade::getInstance())
 {
 }
 
 bool WsMessageResolver::resolve(String message) {
+    Serial.println("Resolved ws message:");
+    
     bool result = false;
 
     if (message.indexOf("1s") >= 0) {
         this->changeAllLedMatrixLevel(message);
+        Serial.println(" - change all led matrix level");
         result = true;
     }
 
     if (message.indexOf("2s") >= 0) {
         this->changeTimerMinute(message);
+        Serial.println(" - change timer minute");
         result = true;
     }
 
     if (message.indexOf("3s") >= 0) {
         this->changeLeftLedMatrixLevel(message);
+        Serial.println(" - change left led matrix level");
         result = true;
     }
 
     if (message.indexOf("4s") >= 0) {
         this->changeCenterLedMatrixLevel(message);
+        Serial.println(" - change center led matrix level");
         result = true;
     }
 
     if (message.indexOf("5s") >= 0) {
         this->changeRightLedMatrixLevel(message);
+        Serial.println(" - change right led matrix level");
         result = true;
     }
 
     if (message.indexOf("getValues") >= 0) {
+        Serial.println(" - get values");
         result = true;
     }
 
@@ -50,8 +59,7 @@ void WsMessageResolver::changeAllLedMatrixLevel(String message) {
 void WsMessageResolver::changeTimerMinute(String message) {
     String timerMinute = message.substring(2);
     wsData.setTimerMinute(timerMinute.toInt());
-    //add task to cron
-    //lightController.rightLedMatrixSetLevel(timerMinute.toInt());
+    this->taskScheduler.addTaskInMinutes(wsData.getTimerMinute(), DisableAllLedMatrixTask::run);
 }
 
 void WsMessageResolver::changeLeftLedMatrixLevel(String message) {

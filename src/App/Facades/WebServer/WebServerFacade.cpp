@@ -1,8 +1,7 @@
 #include "App/Facades/WebServer/WebServerFacade.h"
 
 WebServerFacade::WebServerFacade()
-    : server(AsyncWebServer {80}),
-    webSocketFacade(WebSocketFacade {})
+    : server(AsyncWebServer {80})
 {
 }
 
@@ -21,7 +20,9 @@ void WebServerFacade::init() {
 void WebServerFacade::addWsHandler() {
     Serial.println(" - start add handler");
 
-    this->server.addHandler(this->webSocketFacade.getWebSocketObject());
+    WebSocketFacade& webSocket = WebSocketFacade::getInstance();
+
+    this->server.addHandler(webSocket.getWebSocketObject());
 
     Serial.println(" - finish add handler");
 }
@@ -50,8 +51,4 @@ void WebServerFacade::begin() {
     this->server.begin();
 
     Serial.println(" - finish web server begin");
-}
-
-void WebServerFacade::cleanupClients() {
-    this->webSocketFacade.cleanupClients();
 }

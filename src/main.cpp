@@ -1,24 +1,23 @@
 #include <Arduino.h>
 #include <ESPAsyncTCP.h>
 #include <ESPAsyncWebServer.h>
-#include "LittleFS.h"
+#include <Time.h>
+#include <TimeAlarms.h>
+#include <LittleFS.h>
 #include "env.h"
-#include "App/Logger/Logger.h"
-#include "App/Facades/WiFi/WiFiConnectionFacade.h"
-#include "App/Facades/WebServer/WebServerFacade.h"
 #include "App/Facades/LittleFS/LittleFSFacade.h"
+#include "App/Facades/WiFi/WiFiConnectionFacade.h"
+#include "App/Facades/WebSocket/WebSocketFacade.h"
+#include "App/Facades/WebServer/WebServerFacade.h"
+#include "App/Logger/Logger.h"
 
 LittleFSFacade littleFS;
-WiFiConnectionFacade WiFiConnection {
-    WIFI_SSID,
-    WIFI_PASSWORD,
-    WIFI_IP,
-    WIFI_GATEWAY,
-    WIFI_SUBNET
-};
+WiFiConnectionFacade WiFiConnection {WIFI_SSID, WIFI_PASSWORD, WIFI_IP, WIFI_GATEWAY, WIFI_SUBNET};
 WebServerFacade webServer;
+WebSocketFacade& webSocket = WebSocketFacade::getInstance();
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 WsData& wsData = WsData::getInstance();
+TaskSchedulerFacade& taskScheduler = TaskSchedulerFacade::getInstance();
 
 void setup() {
     Serial.begin(115200);
@@ -37,6 +36,8 @@ void setup() {
 
     webServer.init();
     wsData.initializeData();
+
+    //taskScheduler.addRepeatTaskInSeconds(5, DisableAllLedMatrixTask::run);
 }
 
 void loop() {
@@ -46,5 +47,6 @@ void loop() {
         Ledlogger.wifiConnected();
     }
 
-    webServer.cleanupClients();
+    webSocket.cleanupClients();
+    taskScheduler.handleTask();
 }
