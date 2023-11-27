@@ -1,12 +1,12 @@
 #include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
 
+TaskSchedulerFacade::TaskSchedulerFacade() {
+    setTime(0, 0, 0, 25, 11, 23);
+}
+
 TaskSchedulerFacade& TaskSchedulerFacade::getInstance() {
     static TaskSchedulerFacade instance;
     return instance;
-}
-
-void TaskSchedulerFacade::initTime() {
-    setTime(0, 0, 0, 25, 11, 23);
 }
 
 void TaskSchedulerFacade::addTaskInSeconds(unsigned char second, void (*funcPtr)()) {

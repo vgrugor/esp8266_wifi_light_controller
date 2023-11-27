@@ -22,7 +22,7 @@
 
         private:
             TimeAlarmsClass alarm;
-            TaskSchedulerFacade() = default;
+            TaskSchedulerFacade();
             ~TaskSchedulerFacade() = default;
             TaskSchedulerFacade(const TaskSchedulerFacade&) = delete;
             TaskSchedulerFacade& operator=(const TaskSchedulerFacade&) = delete;

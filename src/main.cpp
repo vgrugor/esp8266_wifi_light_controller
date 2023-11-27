@@ -12,13 +12,7 @@
 #include "App/Logger/Logger.h"
 
 LittleFSFacade littleFS;
-WiFiConnectionFacade WiFiConnection {
-    WIFI_SSID,
-    WIFI_PASSWORD,
-    WIFI_IP,
-    WIFI_GATEWAY,
-    WIFI_SUBNET
-};
+WiFiConnectionFacade WiFiConnection {WIFI_SSID, WIFI_PASSWORD, WIFI_IP, WIFI_GATEWAY, WIFI_SUBNET};
 WebServerFacade webServer;
 WebSocketFacade& webSocket = WebSocketFacade::getInstance();
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
@@ -41,8 +35,6 @@ void setup() {
     Ledlogger.wifiConnected();
 
     webServer.init();
-
-    taskScheduler.initTime();
     wsData.initializeData();
 
     //taskScheduler.addRepeatTaskInSeconds(5, DisableAllLedMatrixTask::run);
