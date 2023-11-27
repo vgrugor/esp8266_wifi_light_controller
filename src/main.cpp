@@ -37,7 +37,7 @@ void setup() {
     webServer.init();
     wsData.initializeData();
 
-    //taskScheduler.addRepeatTaskInSeconds(5, DisableAllLedMatrixTask::run);
+    taskScheduler.addRepeatTaskInSeconds(5, DisableAllLedMatrixTask::run);
 }
 
 void loop() {
