@@ -2,7 +2,7 @@
 
 WebServerFacade::WebServerFacade()
     : server(AsyncWebServer {80}),
-    webSocketFacade(WebSocketFacade {})
+    webSocketFacade(WebSocketFacade::getInstance())
 {
 }
 
@@ -52,6 +52,6 @@ void WebServerFacade::begin() {
     Serial.println(" - finish web server begin");
 }
 
-void WebServerFacade::cleanupClients() {
-    this->webSocketFacade.cleanupClients();
-}
+//void WebServerFacade::cleanupClients() {
+    //this->webSocketFacade.cleanupClients();
+//}

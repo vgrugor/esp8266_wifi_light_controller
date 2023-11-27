@@ -15,7 +15,7 @@
 
         private:
             AsyncWebServer server;
-            WebSocketFacade webSocketFacade;
+            WebSocketFacade& webSocketFacade;
             void addWsHandler();
             void initRoutes();
             void begin();

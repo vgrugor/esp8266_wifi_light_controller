@@ -1,8 +1,12 @@
 #include "App/Facades/WebSocket/WebSocketFacade.h"
 
+WebSocketFacade& WebSocketFacade::getInstance() {
+    static WebSocketFacade instance;
+    return instance;
+}
+
 WebSocketFacade::WebSocketFacade()
-    : webSocket(AsyncWebSocket {"/ws"}),
-    wsMessageResolver(WsMessageResolver {})
+    : webSocket(AsyncWebSocket {"/ws"})
 {
     using namespace std::placeholders;
 
@@ -51,7 +55,9 @@ void WebSocketFacade::handleMessage(
         data[len] = 0;
 
         String message = (char*)data;
-        bool result = this->wsMessageResolver.resolve(message);
+
+        WsMessageResolver wsMessageResolver {};
+        bool result = wsMessageResolver.resolve(message);
 
         if (result) {
              this->notifyClients();

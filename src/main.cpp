@@ -3,15 +3,16 @@
 #include <ESPAsyncWebServer.h>
 #include <Time.h>
 #include <TimeAlarms.h>
-#include "LittleFS.h"
+#include <LittleFS.h>
 #include "env.h"
-#include "App/Logger/Logger.h"
-#include "App/Facades/WiFi/WiFiConnectionFacade.h"
-#include "App/Facades/WebServer/WebServerFacade.h"
 #include "App/Facades/LittleFS/LittleFSFacade.h"
+#include "App/Facades/WiFi/WiFiConnectionFacade.h"
+#include "App/Facades/WebSocket/WebSocketFacade.h"
+#include "App/Facades/WebServer/WebServerFacade.h"
+#include "App/Logger/Logger.h"
 
-#include "App/Task/DisableAllLedMatrix/DisableAllLedMatrixTask.h"
-#include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
+//#include "App/Task/DisableAllLedMatrix/DisableAllLedMatrixTask.h"
+//#include "App/Facades/TaskScheduler/TaskSchedulerFacade.h"
 
 LittleFSFacade littleFS;
 WiFiConnectionFacade WiFiConnection {
@@ -22,14 +23,13 @@ WiFiConnectionFacade WiFiConnection {
     WIFI_SUBNET
 };
 WebServerFacade webServer;
+WebSocketFacade& webSocket = WebSocketFacade::getInstance();
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 WsData& wsData = WsData::getInstance();
 TaskSchedulerFacade& taskScheduler = TaskSchedulerFacade::getInstance();
 
 void setup() {
     Serial.begin(115200);
-
-    taskScheduler.initTime();
 
     pinMode(GREEN_LED_PIN, OUTPUT);
     pinMode(RED_LED_PIN, OUTPUT);
@@ -44,6 +44,8 @@ void setup() {
     Ledlogger.wifiConnected();
 
     webServer.init();
+
+    taskScheduler.initTime();
     wsData.initializeData();
 
     //taskScheduler.addTaskInSeconds(30, DisableAllLedMatrixTask::run); add get temperature task
@@ -56,7 +58,8 @@ void loop() {
         Ledlogger.wifiConnected();
     }
 
-    webServer.cleanupClients();
+    //webServer.cleanupClients();
+    webSocket.cleanupClients();
 
     taskScheduler.handleTask();
 }
