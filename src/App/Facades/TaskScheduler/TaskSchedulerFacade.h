@@ -9,7 +9,6 @@
     {
         public:
             static TaskSchedulerFacade& getInstance();
-            void initTime();
             void addTaskInSeconds(unsigned char second, void (*funcPtr)());
             void addTaskInMinutes(unsigned char minute, void (*funcPtr)());
             void addTaskInHours(unsigned char hour, void (*funcPtr)());

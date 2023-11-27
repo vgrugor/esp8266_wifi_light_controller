@@ -2,18 +2,24 @@
 #ifndef TEMPERATURESENSORFACADE_H
     #define TEMPERATURESENSORFACADE_H
 
+    #include <Arduino.h>
     #include <OneWire.h>
     #include <DallasTemperature.h>
+    #include "env.h"
 
     class TemperatureSensorFacade {
         public:
-            TemperatureSensorFacade(const unsigned char temperaturePin);
+            static TemperatureSensorFacade& getInstance();
             void init();
             float getTemperatureC();
 
         private:
             const int DELAY_GETTING_TEMPERATURE = 2000; 
             DallasTemperature sensor;
+            TemperatureSensorFacade();
+            ~TemperatureSensorFacade() = default;
+            TemperatureSensorFacade(const TemperatureSensorFacade&) = delete;
+            TemperatureSensorFacade& operator=(const TemperatureSensorFacade&) = delete;
     };
 
 #endif
