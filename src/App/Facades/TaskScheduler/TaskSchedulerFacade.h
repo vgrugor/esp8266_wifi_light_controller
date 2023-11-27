@@ -4,8 +4,6 @@
 
     #include <TimeLib.h>
     #include <TimeAlarms.h>
-    #include <string>
-    #include <functional>
 
     class TaskSchedulerFacade
     {
