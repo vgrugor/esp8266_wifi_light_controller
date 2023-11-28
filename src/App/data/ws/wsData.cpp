@@ -100,8 +100,8 @@ String WsData::toJSON()
     sliderValues["sliderValue3"] = String(this->getLeftLedMatrixLevel());
     sliderValues["sliderValue4"] = String(this->getCenterLedMatrixLevel());
     sliderValues["sliderValue5"] = String(this->getRightLedMatrixLevel());
-    sliderValues["temperature"] = String(this->getTemperature());
-    sliderValues["outdoorTemperature"] = String(this->getOutdoorTemperature());
+    sliderValues["sliderValue6"] = String(this->getTemperature());
+    sliderValues["sliderValue7"] = String(this->getOutdoorTemperature());
 
     return JSON.stringify(sliderValues);
 }
