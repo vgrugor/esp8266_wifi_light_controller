@@ -11,6 +11,8 @@ void GetTemperatureTask::run() {
     WebSocketFacade& webSocket = WebSocketFacade::getInstance();
     TemperatureSensorFacade& temperatureSensor = TemperatureSensorFacade::getInstance();
 
+    Serial.println(temperatureSensor.getTemperatureC());
+
     wsData.setTemperature(temperatureSensor.getTemperatureC());
 
     webSocket.notifyClients();

@@ -15,6 +15,7 @@
 
         private:
             const int DELAY_GETTING_TEMPERATURE = 2000; 
+            OneWire oneWire;
             DallasTemperature sensor;
             TemperatureSensorFacade();
             ~TemperatureSensorFacade() = default;

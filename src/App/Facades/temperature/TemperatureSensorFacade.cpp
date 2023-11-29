@@ -1,14 +1,14 @@
 #include "App/Facades/temperature/TemperatureSensorFacade.h"
 
+TemperatureSensorFacade::TemperatureSensorFacade()
+    : oneWire(OneWire (TEMPERATURE_SENSOR_PIN)),
+    sensor(DallasTemperature(&this->oneWire))
+{
+}
+
 TemperatureSensorFacade& TemperatureSensorFacade::getInstance() {
     static TemperatureSensorFacade instance;
     return instance;
-}
-
-TemperatureSensorFacade::TemperatureSensorFacade()
-{
-    OneWire oneWire {TEMPERATURE_SENSOR_PIN};
-    this->sensor = DallasTemperature {&oneWire};
 }
 
 void TemperatureSensorFacade::init()
@@ -19,8 +19,8 @@ void TemperatureSensorFacade::init()
 float TemperatureSensorFacade::getTemperatureC()
 {
     this->sensor.requestTemperatures();
-    float temperature = this->sensor.getTempCByIndex(0);
+    float temperatureC = this->sensor.getTempCByIndex(0);
     delay(TemperatureSensorFacade::DELAY_GETTING_TEMPERATURE);
 
-    return temperature;
+    return temperatureC;
 }
