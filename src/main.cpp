@@ -10,6 +10,8 @@
 #include "App/Facades/WebSocket/WebSocketFacade.h"
 #include "App/Facades/WebServer/WebServerFacade.h"
 #include "App/Logger/Logger.h"
+#include "App/Facades/Temperature/TemperatureSensorFacade.h"
+#include "App/Task/GetTemperatureTask/GetTemperatureTask.h"
 
 LittleFSFacade littleFS;
 WiFiConnectionFacade WiFiConnection {WIFI_SSID, WIFI_PASSWORD, WIFI_IP, WIFI_GATEWAY, WIFI_SUBNET};
@@ -18,6 +20,7 @@ WebSocketFacade& webSocket = WebSocketFacade::getInstance();
 Logger Ledlogger {GREEN_LED_PIN, RED_LED_PIN};
 WsData& wsData = WsData::getInstance();
 TaskSchedulerFacade& taskScheduler = TaskSchedulerFacade::getInstance();
+TemperatureSensorFacade& temperatureSensor = TemperatureSensorFacade::getInstance();
 
 void setup() {
     Serial.begin(115200);
@@ -36,8 +39,10 @@ void setup() {
 
     webServer.init();
     wsData.initializeData();
+    temperatureSensor.init();
 
-    //taskScheduler.addRepeatTaskInSeconds(5, DisableAllLedMatrixTask::run);
+    taskScheduler.addRepeatTaskInMinutes(10, GetTemperatureTask::run);
+    taskScheduler.addTaskInSeconds(5, GetTemperatureTask::run);
 }
 
 void loop() {
