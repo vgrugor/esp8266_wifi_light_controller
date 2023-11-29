@@ -36,8 +36,30 @@ void WebServerFacade::initRoutes() {
 
     this->server.serveStatic("/", LittleFS, "/");
 
-    this->server.on("outdoor/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
-        request->send(200, "text/plain", "-3");
+    this->server.on("/outdoor/temperature", HTTP_GET, [](AsyncWebServerRequest *request) {
+        Serial.println("Start handle /outdoor/temperature request");
+        if (request->hasParam("temp")) {
+            WsData& wsData = WsData::getInstance();
+            WebSocketFacade& webSocket = WebSocketFacade::getInstance();
+
+            String outdoorTemperature;
+            outdoorTemperature = request->getParam("temp")->value();
+
+            Serial.println("Outdoor temperature");
+            Serial.println(outdoorTemperature);
+
+            wsData.setOutdoorTemperature(atof(outdoorTemperature.c_str()));
+
+            webSocket.notifyClients();
+
+            Serial.println("Finish handle /outdoor/temperature request. Status 200");
+
+            request->send(200, "text/plain", "Ok");
+        }
+
+        Serial.println("Finish handle /outdoor/temperature request. Request not has parameter temp. Status 400");
+        
+        request->send(400, "text/plain", "Error");
     });
 
     //this->server.onNotFound(notFound);

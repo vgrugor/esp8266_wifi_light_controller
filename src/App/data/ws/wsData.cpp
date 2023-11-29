@@ -45,7 +45,7 @@ float WsData::getTemperature()
     return this->temperature;
 }
 
-int WsData::getOutdoorTemperature()
+float WsData::getOutdoorTemperature()
 {
     return this->outdoorTemperature;
 }
