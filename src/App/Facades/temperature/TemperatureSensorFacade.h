@@ -2,7 +2,6 @@
 #ifndef TEMPERATURESENSORFACADE_H
     #define TEMPERATURESENSORFACADE_H
 
-    #include <Arduino.h>
     #include <OneWire.h>
     #include <DallasTemperature.h>
     #include "env.h"
