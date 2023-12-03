@@ -16,7 +16,7 @@
             int getAllLedMatrixLevel();
             int getTimerMinute();
             float getTemperature();
-            int getOutdoorTemperature();
+            float getOutdoorTemperature();
             void setLeftLedMatrixLevel(int level);
             void setCenterLedMatrixLevel(int level);
             void setRightLedMatrixLevel(int level);
