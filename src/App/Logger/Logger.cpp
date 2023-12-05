@@ -14,3 +14,7 @@ void Logger::wifiConnected() {
     this->redLed.turnOff();
     this->greenLed.blink(2);
 }
+
+void Logger::requestReceived() {
+    this->greenLed.blink(2, 100);
+}

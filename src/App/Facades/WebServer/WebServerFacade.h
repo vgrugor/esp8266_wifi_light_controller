@@ -5,6 +5,7 @@
     #include <ESPAsyncWebServer.h>
     #include "App/Facades/WebSocket/WebSocketFacade.h"
     #include "LittleFS.h"
+    #include "App/Logger/Logger.h"
 
     class WebServerFacade {
         public:

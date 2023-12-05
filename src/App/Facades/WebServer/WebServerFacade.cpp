@@ -55,11 +55,14 @@ void WebServerFacade::initRoutes() {
             Serial.println("Finish handle /outdoor/temperature request. Status 200");
 
             request->send(200, "text/plain", "Ok");
+        } else {
+            Serial.println("Finish handle /outdoor/temperature request. Request not has parameter temp. Status 400");
+        
+            request->send(400, "text/plain", "Error");
         }
 
-        Serial.println("Finish handle /outdoor/temperature request. Request not has parameter temp. Status 400");
-        
-        request->send(400, "text/plain", "Error");
+        Logger ledLogger {GREEN_LED_PIN, RED_LED_PIN};
+        ledLogger.requestReceived();
     });
 
     //this->server.onNotFound(notFound);

@@ -8,11 +8,10 @@
     class Logger {
         public:
             Logger(const int greenLedPin, const int redLedPin);
-            void wifiErrorSetStaticIp();
             void wifiConnection();
             void wifiConnected();
             void gettingTemperature();
-            void temperatureReceived(String temperature);
+            void requestReceived();
 
         private:
             OutputDigitalPin greenLed;
