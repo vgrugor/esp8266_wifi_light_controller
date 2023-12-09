@@ -18,7 +18,6 @@
             void handleTask();
 
         private:
-            //TimeAlarmsClass alarm;
             AlarmId disableTimerId;
             TaskSchedulerFacade();
             ~TaskSchedulerFacade() = default;
