@@ -23,13 +23,13 @@ void OutputDigitalPin::toggle() {
 void OutputDigitalPin::blink(int count, int delayMs) {
     if (digitalRead(this->pin) == HIGH) {
         this->turnOff();
-        delay(delayMs);
+        Alarm.delay(delayMs);
     }
 
     for (int i = 0; i < count; i++) {
         this->toggle();
-        delay(delayMs);
+        Alarm.delay(delayMs);
         this->toggle();
-        delay(delayMs);
+        Alarm.delay(delayMs);
     }
 }

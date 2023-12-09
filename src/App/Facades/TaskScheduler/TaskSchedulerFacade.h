@@ -18,7 +18,8 @@
             void handleTask();
 
         private:
-            TimeAlarmsClass alarm;
+            //TimeAlarmsClass alarm;
+            AlarmId disableTimerId;
             TaskSchedulerFacade();
             ~TaskSchedulerFacade() = default;
             TaskSchedulerFacade(const TaskSchedulerFacade&) = delete;
