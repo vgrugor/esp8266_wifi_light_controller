@@ -20,7 +20,7 @@ float TemperatureSensorFacade::getTemperatureC()
 {
     this->sensor.requestTemperatures();
     float temperatureC = this->sensor.getTempCByIndex(0);
-    delay(TemperatureSensorFacade::DELAY_GETTING_TEMPERATURE);
+    Alarm.delay(TemperatureSensorFacade::DELAY_GETTING_TEMPERATURE);
 
     return temperatureC;
 }

@@ -3,6 +3,7 @@
     #define OUTPUTDIGITALPIN_H
 
     #include <Arduino.h>
+    #include <TimeAlarms.h>
 
     class OutputDigitalPin {
         public:
