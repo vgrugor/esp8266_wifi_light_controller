@@ -4,6 +4,8 @@
 
     #include <OneWire.h>
     #include <DallasTemperature.h>
+    #include <TimeAlarms.h>
+
     #include "env.h"
 
     class TemperatureSensorFacade {
