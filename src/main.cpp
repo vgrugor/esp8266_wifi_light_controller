@@ -31,6 +31,9 @@ void setup() {
     pinMode(CENTER_LED_MATRIX, OUTPUT);
     pinMode(RIGHT_LED_MATRIX, OUTPUT);
 
+    pinMode(BOARD_LED, OUTPUT);
+    digitalWrite(BOARD_LED, HIGH);
+
     littleFS.init();
 
     Ledlogger.wifiConnection();

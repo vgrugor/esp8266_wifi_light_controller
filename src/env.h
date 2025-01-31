@@ -17,6 +17,8 @@
     extern const int CENTER_LED_MATRIX;
     extern const int RIGHT_LED_MATRIX;
 
+    extern const int BOARD_LED;
+
     extern const unsigned char TEMPERATURE_SENSOR_PIN;
 
 #endif // ENV_H
